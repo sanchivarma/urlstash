@@ -67,7 +67,7 @@ Deno.serve(async (req: Request) => {
     if (!firecrawlResponse.ok) {
       const errorText = await firecrawlResponse.text();
       console.error('Firecrawl error:', errorText);
-      throw new Error('Something went wrong. Please check the website link is valid or try again in some time.');
+      throw new Error('Something went wrong. Please check if the website link is valid or try again in some time.');
     }
 
     const firecrawlData = await firecrawlResponse.json();

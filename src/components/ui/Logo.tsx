@@ -1,4 +1,4 @@
-export function Logo({ className = "w-8 h-8" }: { className?: string }) {
+export function Logo({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <img
       src="/urlstash_trimmed copy.png"

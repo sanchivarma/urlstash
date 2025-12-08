@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../components/ui/Toast';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
+import { PasswordInput, isPasswordValid, isEmailValid } from '../../components/ui/PasswordInput';
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -16,17 +17,32 @@ export function SignUp() {
     password: '',
     confirmPassword: '',
   });
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      showToast('error', 'Passwords do not match');
+    setErrors({ email: '', password: '', confirmPassword: '' });
+
+    if (!isEmailValid(formData.email)) {
+      setErrors((prev) => ({ ...prev, email: 'Please enter a valid email address' }));
+      showToast('error', 'Please enter a valid email address');
       return;
     }
 
-    if (formData.password.length < 6) {
-      showToast('error', 'Password must be at least 6 characters');
+    if (!isPasswordValid(formData.password)) {
+      setErrors((prev) => ({ ...prev, password: 'Password does not meet requirements' }));
+      showToast('error', 'Password does not meet requirements');
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setErrors((prev) => ({ ...prev, confirmPassword: 'Passwords do not match' }));
+      showToast('error', 'Passwords do not match');
       return;
     }
 
@@ -50,58 +66,67 @@ export function SignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <Link to="/" className="flex items-center justify-center gap-2">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
             <Database className="w-6 h-6 text-white" />
           </div>
-          <span className="text-2xl font-bold text-gray-900">URLStash</span>
+          <span className="text-2xl font-bold text-slate-900 dark:text-white">URLStash</span>
         </Link>
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl font-bold text-slate-900 dark:text-white">
           Create your account
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center text-sm text-slate-600 dark:text-slate-400">
           Or{' '}
-          <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
+          <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
             sign in to existing account
           </Link>
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-sm rounded-lg sm:px-10 border border-gray-200">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
+        <div className="bg-white dark:bg-slate-800 py-8 px-4 shadow-sm rounded-lg sm:px-10 border border-slate-200 dark:border-slate-700">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <Input
-              label="Email address"
-              type="email"
-              required
-              autoComplete="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="you@example.com"
-            />
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Email address
+              </label>
+              <Input
+                type="email"
+                required
+                autoComplete="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="you@example.com"
+              />
+              {errors.email && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>}
+            </div>
 
-            <Input
-              label="Password"
-              type="password"
-              required
-              autoComplete="new-password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              placeholder="••••••••"
-              helperText="Must be at least 6 characters"
-            />
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Password
+              </label>
+              <PasswordInput
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                placeholder="••••••••"
+                showValidation
+                error={errors.password}
+              />
+            </div>
 
-            <Input
-              label="Confirm Password"
-              type="password"
-              required
-              autoComplete="new-password"
-              value={formData.confirmPassword}
-              onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-              placeholder="••••••••"
-            />
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Confirm Password
+              </label>
+              <PasswordInput
+                value={formData.confirmPassword}
+                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                placeholder="••••••••"
+                error={errors.confirmPassword}
+              />
+            </div>
 
             <Button type="submit" className="w-full" loading={loading}>
               Create account

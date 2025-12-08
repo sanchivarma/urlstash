@@ -171,12 +171,12 @@ export function ScrapeDetail() {
 
   const getHeadingStyle = (level: number) => {
     const styles = {
-      1: 'text-2xl font-bold text-gray-900',
-      2: 'text-xl font-semibold text-gray-900 ml-4',
-      3: 'text-lg font-medium text-gray-800 ml-8',
-      4: 'text-base font-medium text-gray-700 ml-12',
-      5: 'text-sm font-medium text-gray-700 ml-16',
-      6: 'text-sm font-normal text-gray-600 ml-20',
+      1: 'text-2xl font-bold text-slate-900 dark:text-white',
+      2: 'text-xl font-semibold text-slate-900 dark:text-white ml-4',
+      3: 'text-lg font-medium text-slate-800 dark:text-slate-200 ml-8',
+      4: 'text-base font-medium text-slate-700 dark:text-slate-300 ml-12',
+      5: 'text-sm font-medium text-slate-700 dark:text-slate-300 ml-16',
+      6: 'text-sm font-normal text-slate-600 dark:text-slate-400 ml-20',
     };
     return styles[level as keyof typeof styles] || styles[6];
   };
@@ -195,7 +195,7 @@ export function ScrapeDetail() {
     return (
       <AppLayout>
         <div className="text-center py-16">
-          <h2 className="text-2xl font-bold text-gray-900">Scrape not found</h2>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Scrape not found</h2>
           <Link to="/scrapes">
             <Button className="mt-4">Back to Scrapes</Button>
           </Link>
@@ -210,7 +210,7 @@ export function ScrapeDetail() {
         <div>
           <Link
             to={`/projects/${scrape.project.id}`}
-            className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1 mb-4"
+            className="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 mb-4"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to {scrape.project.name}
@@ -221,7 +221,7 @@ export function ScrapeDetail() {
               <img src={scrape.favicon_url} alt="" className="w-8 h-8 rounded" />
             )}
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900">{scrape.page_title}</h1>
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{scrape.page_title}</h1>
               <a
                 href={scrape.url}
                 target="_blank"
@@ -232,9 +232,9 @@ export function ScrapeDetail() {
                 <ExternalLink className="w-4 h-4" />
               </a>
               {scrape.meta_description && (
-                <p className="text-gray-600 mt-3">{scrape.meta_description}</p>
+                <p className="text-slate-600 dark:text-slate-400 mt-3">{scrape.meta_description}</p>
               )}
-              <p className="text-sm text-gray-500 mt-2">Scraped on {formatDate(scrape.created_at)}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">Scraped on {formatDate(scrape.created_at)}</p>
             </div>
 
             <Button variant="ghost" size="sm" onClick={() => setShowDeleteModal(true)}>
@@ -247,8 +247,8 @@ export function ScrapeDetail() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-purple-600" />
-                <h2 className="text-lg font-semibold text-gray-900">AI Insights</h2>
+                <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-white">AI Insights</h2>
               </div>
               <Button
                 variant="ghost"
@@ -262,21 +262,21 @@ export function ScrapeDetail() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h3 className="text-sm font-medium text-gray-700 mb-2">Summary</h3>
-                <p className="text-gray-900">{aiInsights.summary_short}</p>
+                <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Summary</h3>
+                <p className="text-slate-900 dark:text-white">{aiInsights.summary_short}</p>
                 {aiInsights.summary_long && (
-                  <p className="text-gray-700 mt-2">{aiInsights.summary_long}</p>
+                  <p className="text-slate-700 dark:text-slate-300 mt-2">{aiInsights.summary_long}</p>
                 )}
               </div>
 
               {aiInsights.tags.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">Tags</h3>
+                  <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Tags</h3>
                   <div className="flex flex-wrap gap-2">
                     {aiInsights.tags.map((tag, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full"
+                        className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-sm rounded-full"
                       >
                         {tag}
                       </span>
@@ -287,8 +287,8 @@ export function ScrapeDetail() {
 
               {Array.isArray(aiInsights.key_points) && aiInsights.key_points.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">Key Takeaways</h3>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700">
+                  <h3 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Key Takeaways</h3>
+                  <ul className="list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
                     {aiInsights.key_points.map((point: string, idx: number) => (
                       <li key={idx}>{point}</li>
                     ))}
@@ -304,9 +304,9 @@ export function ScrapeDetail() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <Hash className="w-5 h-5 text-blue-600" />
-                  <h2 className="text-lg font-semibold text-gray-900">Headings</h2>
-                  <span className="text-sm text-gray-500">({headings.length})</span>
+                  <Hash className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Headings</h2>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">({headings.length})</span>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3 max-h-[600px] overflow-y-auto">
@@ -323,15 +323,15 @@ export function ScrapeDetail() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <LinkIcon className="w-5 h-5 text-green-600" />
-                  <h2 className="text-lg font-semibold text-gray-900">Links</h2>
-                  <span className="text-sm text-gray-500">({links.length})</span>
+                  <LinkIcon className="w-5 h-5 text-green-600 dark:text-green-400" />
+                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Links</h2>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">({links.length})</span>
                 </div>
               </CardHeader>
               <CardContent className="max-h-[600px] overflow-y-auto">
                 <div className="space-y-2">
                   {links.map(link => (
-                    <div key={link.id} className="border-b border-gray-100 pb-2 last:border-0">
+                    <div key={link.id} className="border-b border-slate-100 dark:border-slate-700 pb-2 last:border-0">
                       <a
                         href={link.url}
                         target="_blank"
@@ -341,9 +341,9 @@ export function ScrapeDetail() {
                         {link.anchor_text || link.url}
                         <ExternalLink className="w-3 h-3" />
                       </a>
-                      <p className="text-xs text-gray-500 truncate mt-1">{link.url}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate mt-1">{link.url}</p>
                       {link.is_external && (
-                        <span className="text-xs text-gray-400">External</span>
+                        <span className="text-xs text-slate-400 dark:text-slate-500">External</span>
                       )}
                     </div>
                   ))}
@@ -356,7 +356,7 @@ export function ScrapeDetail() {
         {headings.length === 0 && links.length === 0 && (
           <Card>
             <CardContent className="text-center py-16">
-              <p className="text-gray-600">No content extracted from this page</p>
+              <p className="text-slate-600 dark:text-slate-400">No content extracted from this page</p>
             </CardContent>
           </Card>
         )}
@@ -364,7 +364,7 @@ export function ScrapeDetail() {
 
       <Modal isOpen={showDeleteModal} onClose={() => setShowDeleteModal(false)} title="Delete Scrape">
         <div className="space-y-4">
-          <p className="text-gray-600">
+          <p className="text-slate-600 dark:text-slate-400">
             Are you sure you want to delete this scrape? This action cannot be undone.
           </p>
           <div className="flex gap-3 pt-4">

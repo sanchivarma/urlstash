@@ -200,7 +200,7 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
             />
             <button
               type="button"
-              className="mt-2 text-sm text-gray-600 hover:text-gray-700"
+              className="mt-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
               onClick={() => setShowNewProject(false)}
             >
               Cancel
@@ -216,7 +216,7 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
             onChange={(e) => setFormData({ ...formData, useAi: e.target.checked })}
             className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
           />
-          <label htmlFor="useAi" className="text-sm text-gray-700">
+          <label htmlFor="useAi" className="text-sm text-slate-700 dark:text-slate-300">
             Use AI to summarize and analyze this page
           </label>
         </div>

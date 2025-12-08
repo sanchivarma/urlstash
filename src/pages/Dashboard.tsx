@@ -113,8 +113,8 @@ export function Dashboard() {
       <div className="space-y-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-600 mt-1">Welcome back! Here's what's happening.</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Dashboard</h1>
+            <p className="text-slate-600 dark:text-slate-400 mt-1">Welcome back! Here's what's happening.</p>
           </div>
           <Button onClick={() => setShowNewScrapeModal(true)} className="w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
@@ -125,36 +125,36 @@ export function Dashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card>
             <CardContent className="flex items-center gap-4">
-              <div className="p-3 bg-blue-100 rounded-lg">
-                <FolderOpen className="w-6 h-6 text-blue-600" />
+              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                <FolderOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Total Projects</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.totalProjects}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Total Projects</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">{stats.totalProjects}</p>
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardContent className="flex items-center gap-4">
-              <div className="p-3 bg-green-100 rounded-lg">
-                <FileText className="w-6 h-6 text-green-600" />
+              <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                <FileText className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Total Scrapes</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.totalScrapes}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Total Scrapes</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">{stats.totalScrapes}</p>
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardContent className="flex items-center gap-4">
-              <div className="p-3 bg-purple-100 rounded-lg">
-                <TrendingUp className="w-6 h-6 text-purple-600" />
+              <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">This Week</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm text-slate-600 dark:text-slate-400">This Week</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white">
                   {recentScrapes.filter(s => {
                     const weekAgo = new Date();
                     weekAgo.setDate(weekAgo.getDate() - 7);
@@ -169,7 +169,7 @@ export function Dashboard() {
         <div className="grid lg:grid-cols-2 gap-8">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">Recent Projects</h2>
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Recent Projects</h2>
               <Link to="/projects">
                 <Button variant="ghost" size="sm">View all</Button>
               </Link>
@@ -177,8 +177,8 @@ export function Dashboard() {
             {projects.length === 0 ? (
               <Card>
                 <CardContent className="text-center py-12">
-                  <FolderOpen className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-600 mb-4">No projects yet</p>
+                  <FolderOpen className="w-12 h-12 text-slate-400 dark:text-slate-500 mx-auto mb-3" />
+                  <p className="text-slate-600 dark:text-slate-400 mb-4">No projects yet</p>
                   <Link to="/projects">
                     <Button size="sm">Create your first project</Button>
                   </Link>
@@ -192,11 +192,11 @@ export function Dashboard() {
                       <CardContent>
                         <div className="flex items-start justify-between">
                           <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-gray-900 truncate">{project.name}</h3>
+                            <h3 className="font-semibold text-slate-900 dark:text-white truncate">{project.name}</h3>
                             {project.description && (
-                              <p className="text-sm text-gray-600 mt-1 line-clamp-2">{project.description}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 line-clamp-2">{project.description}</p>
                             )}
-                            <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                            <div className="flex items-center gap-4 mt-2 text-xs text-slate-500 dark:text-slate-400">
                               <span>{project.scrape_count || 0} scrapes</span>
                               <span>{formatDate(project.created_at)}</span>
                             </div>
@@ -212,7 +212,7 @@ export function Dashboard() {
 
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">Recent Scrapes</h2>
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-white">Recent Scrapes</h2>
               <Link to="/scrapes">
                 <Button variant="ghost" size="sm">View all</Button>
               </Link>
@@ -220,8 +220,8 @@ export function Dashboard() {
             {recentScrapes.length === 0 ? (
               <Card>
                 <CardContent className="text-center py-12">
-                  <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-600 mb-4">No scrapes yet</p>
+                  <FileText className="w-12 h-12 text-slate-400 dark:text-slate-500 mx-auto mb-3" />
+                  <p className="text-slate-600 dark:text-slate-400 mb-4">No scrapes yet</p>
                   <Button size="sm" onClick={() => setShowNewScrapeModal(true)}>
                     Create your first scrape
                   </Button>
@@ -233,9 +233,9 @@ export function Dashboard() {
                   <Link key={scrape.id} to={`/scrapes/${scrape.id}`}>
                     <Card hover>
                       <CardContent>
-                        <h3 className="font-medium text-gray-900 truncate">{scrape.page_title}</h3>
-                        <p className="text-sm text-gray-600 truncate mt-1">{scrape.url}</p>
-                        <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                        <h3 className="font-medium text-slate-900 dark:text-white truncate">{scrape.page_title}</h3>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 truncate mt-1">{scrape.url}</p>
+                        <div className="flex items-center gap-4 mt-2 text-xs text-slate-500 dark:text-slate-400">
                           <span>{scrape.project?.name}</span>
                           <span>{formatDate(scrape.created_at)}</span>
                         </div>

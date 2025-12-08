@@ -149,7 +149,7 @@ export function ProjectDetail() {
     return (
       <AppLayout>
         <div className="text-center py-16">
-          <h2 className="text-2xl font-bold text-gray-900">Project not found</h2>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Project not found</h2>
           <Link to="/projects">
             <Button className="mt-4">Back to Projects</Button>
           </Link>
@@ -162,18 +162,18 @@ export function ProjectDetail() {
     <AppLayout>
       <div className="space-y-6">
         <div>
-          <Link to="/projects" className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1 mb-4">
+          <Link to="/projects" className="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 mb-4">
             <ArrowLeft className="w-4 h-4" />
             Back to Projects
           </Link>
 
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{project.name}</h1>
               {project.description && (
-                <p className="text-gray-600 mt-2">{project.description}</p>
+                <p className="text-slate-600 dark:text-slate-400 mt-2">{project.description}</p>
               )}
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
                 Created {formatDate(project.created_at)} • {scrapes.length} scrapes
               </p>
             </div>
@@ -194,7 +194,7 @@ export function ProjectDetail() {
         </div>
 
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500" />
           <Input
             type="text"
             placeholder="Search scrapes..."
@@ -207,11 +207,11 @@ export function ProjectDetail() {
         {filteredScrapes.length === 0 ? (
           <Card>
             <CardContent className="text-center py-16">
-              <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <FileText className="w-16 h-16 text-slate-400 dark:text-slate-500 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
                 {searchQuery ? 'No scrapes found' : 'No scrapes in this project'}
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-slate-600 dark:text-slate-400 mb-6">
                 {searchQuery
                   ? 'Try adjusting your search'
                   : 'Create your first scrape to get started'}
@@ -232,26 +232,26 @@ export function ProjectDetail() {
                   <CardContent>
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-gray-900 truncate">{scrape.page_title}</h3>
-                        <p className="text-sm text-gray-600 truncate mt-1">{scrape.url}</p>
+                        <h3 className="font-semibold text-slate-900 dark:text-white truncate">{scrape.page_title}</h3>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 truncate mt-1">{scrape.url}</p>
                         {scrape.meta_description && (
-                          <p className="text-sm text-gray-600 mt-2 line-clamp-2">{scrape.meta_description}</p>
+                          <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">{scrape.meta_description}</p>
                         )}
                         <div className="flex items-center gap-2 mt-2">
                           {scrape.tags.slice(0, 3).map((tag, idx) => (
                             <span
                               key={idx}
-                              className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full"
+                              className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs rounded-full"
                             >
                               {tag}
                             </span>
                           ))}
                           {scrape.tags.length > 3 && (
-                            <span className="text-xs text-gray-500">+{scrape.tags.length - 3} more</span>
+                            <span className="text-xs text-slate-500 dark:text-slate-400">+{scrape.tags.length - 3} more</span>
                           )}
                         </div>
                       </div>
-                      <span className="text-sm text-gray-500 flex-shrink-0">{formatDate(scrape.created_at)}</span>
+                      <span className="text-sm text-slate-500 dark:text-slate-400 flex-shrink-0">{formatDate(scrape.created_at)}</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -295,7 +295,7 @@ export function ProjectDetail() {
 
       <Modal isOpen={showDeleteModal} onClose={() => setShowDeleteModal(false)} title="Delete Project">
         <div className="space-y-4">
-          <p className="text-gray-600">
+          <p className="text-slate-600 dark:text-slate-400">
             Are you sure you want to delete <strong>{project.name}</strong>? This will also delete all {scrapes.length} scrapes in this project. This action cannot be undone.
           </p>
           <div className="flex gap-3 pt-4">

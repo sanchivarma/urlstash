@@ -109,8 +109,8 @@ export function Scrapes() {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">All Scrapes</h1>
-            <p className="text-gray-600 mt-1">Browse and search all your scraped content</p>
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white">All Scrapes</h1>
+            <p className="text-slate-600 dark:text-slate-400 mt-1">Browse and search all your scraped content</p>
           </div>
           <Button onClick={() => setShowNewScrapeModal(true)} className="w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
@@ -120,7 +120,7 @@ export function Scrapes() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="sm:col-span-2 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
             <Input
               type="text"
               placeholder="Search by title, URL, or tags..."
@@ -144,11 +144,11 @@ export function Scrapes() {
         {filteredScrapes.length === 0 ? (
           <Card>
             <CardContent className="text-center py-16">
-              <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <FileText className="w-16 h-16 text-slate-400 dark:text-slate-500 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
                 {searchQuery || selectedProject ? 'No scrapes found' : 'No scrapes yet'}
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-slate-600 dark:text-slate-400 mb-6">
                 {searchQuery || selectedProject
                   ? 'Try adjusting your filters'
                   : 'Create your first scrape to get started'}
@@ -170,28 +170,28 @@ export function Scrapes() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full">
+                          <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs rounded-full">
                             {scrape.project.name}
                           </span>
-                          <span className="text-xs text-gray-500">{formatDate(scrape.created_at)}</span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400">{formatDate(scrape.created_at)}</span>
                         </div>
-                        <h3 className="font-semibold text-gray-900 truncate">{scrape.page_title}</h3>
-                        <p className="text-sm text-gray-600 truncate mt-1">{scrape.url}</p>
+                        <h3 className="font-semibold text-slate-900 dark:text-white truncate">{scrape.page_title}</h3>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 truncate mt-1">{scrape.url}</p>
                         {scrape.meta_description && (
-                          <p className="text-sm text-gray-600 mt-2 line-clamp-2">{scrape.meta_description}</p>
+                          <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">{scrape.meta_description}</p>
                         )}
                         {scrape.tags.length > 0 && (
                           <div className="flex items-center gap-2 mt-2 flex-wrap">
                             {scrape.tags.slice(0, 4).map((tag, idx) => (
                               <span
                                 key={idx}
-                                className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full"
+                                className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs rounded-full"
                               >
                                 {tag}
                               </span>
                             ))}
                             {scrape.tags.length > 4 && (
-                              <span className="text-xs text-gray-500">+{scrape.tags.length - 4} more</span>
+                              <span className="text-xs text-slate-500 dark:text-slate-400">+{scrape.tags.length - 4} more</span>
                             )}
                           </div>
                         )}

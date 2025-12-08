@@ -22,32 +22,32 @@ Deno.serve(async (req: Request) => {
 
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) {
-      throw new Error('Missing authorization header');
+      throw new Error('Authentication required. Please log in again.');
     }
 
     const token = authHeader.replace('Bearer ', '');
     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
 
     if (authError || !user) {
-      throw new Error('Unauthorized: ' + (authError?.message || 'Invalid token'));
+      throw new Error('Your session has expired. Please log in again.');
     }
 
     let requestBody;
     try {
       requestBody = await req.json();
     } catch (e) {
-      throw new Error('Invalid JSON in request body');
+      throw new Error('Invalid request. Please try again.');
     }
 
     const { url, projectId, useAi } = requestBody;
 
     if (!url || !projectId) {
-      throw new Error('Missing required fields: url and projectId');
+      throw new Error('Please provide both a website URL and select a project.');
     }
 
     const firecrawlApiKey = Deno.env.get('FIRECRAWL_API_KEY');
     if (!firecrawlApiKey) {
-      throw new Error('FIRECRAWL_API_KEY is not configured. Please add your Firecrawl API key to the Edge Function secrets.');
+      throw new Error('Scraping service is not configured. Please contact support.');
     }
 
     console.log('Scraping URL:', url);
@@ -67,7 +67,7 @@ Deno.serve(async (req: Request) => {
     if (!firecrawlResponse.ok) {
       const errorText = await firecrawlResponse.text();
       console.error('Firecrawl error:', errorText);
-      throw new Error(`Firecrawl API error (${firecrawlResponse.status}): ${errorText}`);
+      throw new Error('Something went wrong. Please check the website link is valid or try again in some time.');
     }
 
     const firecrawlData = await firecrawlResponse.json();
@@ -132,7 +132,7 @@ Deno.serve(async (req: Request) => {
 
     if (scrapeError) {
       console.error('Database error:', scrapeError);
-      throw new Error('Failed to save scrape: ' + scrapeError.message);
+      throw new Error('Unable to save the scraped data. Please try again.');
     }
 
     if (headings.length > 0) {

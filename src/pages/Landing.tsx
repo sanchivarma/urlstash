@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Sparkles, FolderOpen, Zap, Shield, BarChart3 } from 'lucide-react';
+import { useState } from 'react';
+import { Sparkles, FolderOpen, Zap, Shield, BarChart3, Menu, X } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ThemeToggle } from '../components/ui/ThemeToggle';
 import { Logo } from '../components/ui/Logo';
 
 export function Landing() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 relative">
       <nav className="border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 relative z-10">
@@ -16,14 +19,41 @@ export function Landing() {
             </Link>
             <div className="flex items-center gap-2 sm:gap-3">
               <ThemeToggle />
+
+              {/* Desktop buttons */}
               <Link to="/login" className="hidden sm:block">
                 <Button variant="ghost">Login</Button>
               </Link>
               <Link to="/signup" className="hidden sm:block">
                 <Button size="sm" className="sm:text-base">Get Started</Button>
               </Link>
+
+              {/* Mobile hamburger menu */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="sm:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 text-slate-900 dark:text-white" />
+                ) : (
+                  <Menu className="w-6 h-6 text-slate-900 dark:text-white" />
+                )}
+              </button>
             </div>
           </div>
+
+          {/* Mobile menu dropdown */}
+          {isMobileMenuOpen && (
+            <div className="sm:hidden border-t border-slate-200 dark:border-slate-700 py-4 space-y-2">
+              <Link to="/login" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start">Login</Button>
+              </Link>
+              <Link to="/signup" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button className="w-full">Get Started</Button>
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
 

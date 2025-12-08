@@ -175,8 +175,8 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
           required
           value={formData.url}
           onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-          placeholder="example.com or https://example.com"
-          helperText="Enter the website URL (https:// will be added automatically if not specified)"
+          placeholder="https://example.com"
+          helperText="Enter a valid website URL"
         />
 
         {!showNewProject ? (

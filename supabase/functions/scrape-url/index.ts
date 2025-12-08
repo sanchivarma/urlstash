@@ -72,8 +72,13 @@ Deno.serve(async (req: Request) => {
 
     const firecrawlData = await firecrawlResponse.json();
     console.log('Firecrawl response received');
-    
+
     const content = firecrawlData.data;
+
+    if (!content) {
+      console.error('Firecrawl returned invalid data structure:', firecrawlData);
+      throw new Error('Something went wrong. Please check if the website link is valid or try again in some time.');
+    }
 
     const pageTitle = content.metadata?.title || 'Untitled';
     const metaDescription = content.metadata?.description || null;
@@ -221,8 +226,23 @@ Deno.serve(async (req: Request) => {
     );
   } catch (error: any) {
     console.error('Edge function error:', error);
+
+    const userFriendlyErrors = [
+      'Authentication required. Please log in again.',
+      'Your session has expired. Please log in again.',
+      'Invalid request. Please try again.',
+      'Please provide both a website URL and select a project.',
+      'Scraping service is not configured. Please contact support.',
+      'Something went wrong. Please check if the website link is valid or try again in some time.',
+      'Unable to save the scraped data. Please try again.',
+    ];
+
+    const errorMessage = userFriendlyErrors.includes(error.message)
+      ? error.message
+      : 'Something went wrong. Please check if the website link is valid or try again in some time.';
+
     return new Response(
-      JSON.stringify({ error: error.message || 'An unexpected error occurred' }),
+      JSON.stringify({ error: errorMessage }),
       {
         status: 400,
         headers: {

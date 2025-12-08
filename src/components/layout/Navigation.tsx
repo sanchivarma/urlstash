@@ -27,7 +27,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-8">
             <Link to="/dashboard" className="flex items-center gap-2 group">
-              <Logo className="w-6 h-6 transition-transform group-hover:scale-105" />
+              <Logo className="w-5 h-5 transition-transform group-hover:scale-105" />
               <span className="text-xl font-bold text-slate-900 dark:text-white">URLStash</span>
             </Link>
 

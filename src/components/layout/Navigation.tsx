@@ -3,6 +3,7 @@ import { LayoutDashboard, FolderOpen, Database, LogOut, Menu, X } from 'lucide-r
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/Button';
 import { ThemeToggle } from '../ui/ThemeToggle';
+import { Logo } from '../ui/Logo';
 import { useState } from 'react';
 
 export function Navigation() {
@@ -25,10 +26,8 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-8">
-            <Link to="/dashboard" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-                <Database className="w-5 h-5 text-white" />
-              </div>
+            <Link to="/dashboard" className="flex items-center gap-2 group">
+              <Logo className="w-10 h-10 transition-transform group-hover:scale-105" />
               <span className="text-xl font-bold text-slate-900 dark:text-white">URLStash</span>
             </Link>
 

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Database, Sparkles, FolderOpen, Zap, Shield, BarChart3 } from 'lucide-react';
+import { Sparkles, FolderOpen, Zap, Shield, BarChart3 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ThemeToggle } from '../components/ui/ThemeToggle';
+import { Logo } from '../components/ui/Logo';
 
 export function Landing() {
   return (
@@ -9,12 +10,10 @@ export function Landing() {
       <nav className="border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-                <Database className="w-5 h-5 text-white" />
-              </div>
+            <Link to="/" className="flex items-center gap-2 group">
+              <Logo className="w-10 h-10 transition-transform group-hover:scale-105" />
               <span className="text-xl font-bold text-slate-900 dark:text-white">URLStash</span>
-            </div>
+            </Link>
             <div className="flex items-center gap-3">
               <ThemeToggle />
               <Link to="/login">

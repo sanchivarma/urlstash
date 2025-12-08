@@ -54,9 +54,19 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
     setProjects(data || []);
   };
 
+  const normalizeUrl = (url: string) => {
+    const trimmedUrl = url.trim();
+    if (!trimmedUrl) return '';
+
+    if (!trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
+      return `https://${trimmedUrl}`;
+    }
+    return trimmedUrl;
+  };
+
   const validateUrl = (url: string) => {
     try {
-      new URL(url);
+      new URL(normalizeUrl(url));
       return true;
     } catch {
       return false;
@@ -66,8 +76,10 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const normalizedUrl = normalizeUrl(formData.url);
+
     if (!validateUrl(formData.url)) {
-      showToast('error', 'Please enter a valid URL (e.g., https://example.com)');
+      showToast('error', 'Please enter a valid URL (e.g., example.com or https://example.com)');
       return;
     }
 
@@ -117,7 +129,7 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          url: formData.url,
+          url: normalizedUrl,
           projectId,
           useAi: formData.useAi,
         }),
@@ -163,8 +175,8 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
           required
           value={formData.url}
           onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-          placeholder="https://example.com/page"
-          helperText="Enter the full URL including https://"
+          placeholder="example.com or https://example.com"
+          helperText="Enter the website URL (https:// will be added automatically if not specified)"
         />
 
         {!showNewProject ? (

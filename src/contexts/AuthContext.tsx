@@ -18,12 +18,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.warn('Auth initialization timeout - setting loading to false');
+      setLoading(false);
+    }, 5000);
+
     supabase.auth.getSession()
       .then(({ data: { session } }) => {
+        clearTimeout(timeoutId);
         setUser(session?.user ?? null);
         setLoading(false);
       })
       .catch((error) => {
+        clearTimeout(timeoutId);
         console.error('Auth initialization error:', error);
         setLoading(false);
       });
@@ -34,7 +41,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       })();
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(timeoutId);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signUp = async (email: string, password: string) => {

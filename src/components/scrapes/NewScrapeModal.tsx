@@ -171,12 +171,12 @@ export function NewScrapeModal({ isOpen, onClose, onSuccess }: NewScrapeModalPro
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           label="Website URL"
-          type="url"
+          type="text"
           required
           value={formData.url}
           onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-          placeholder="https://example.com"
-          helperText="Enter a valid website URL"
+          placeholder="example.com or https://example.com"
+          helperText="https:// will be added automatically if not specified"
         />
 
         {!showNewProject ? (

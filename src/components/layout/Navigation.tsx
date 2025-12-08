@@ -28,7 +28,7 @@ export function Navigation() {
           <div className="flex items-center gap-4 sm:gap-8">
             <Link to="/dashboard" className="flex items-center gap-2 group">
               <Logo className="w-8 h-8 sm:w-5 sm:h-5 transition-transform group-hover:scale-105" />
-              <span className="text-xl font-bold text-slate-900 dark:text-white hidden sm:inline">URLStash</span>
+              <span className="text-xl font-bold text-slate-900 dark:text-white">URLStash</span>
             </Link>
 
             <div className="hidden md:flex items-center gap-1">

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Database } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useToast } from '../../components/ui/Toast';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { PasswordInput, isPasswordValid, isEmailValid } from '../../components/ui/PasswordInput';
+import { Logo } from '../../components/ui/Logo';
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -68,10 +68,8 @@ export function SignUp() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <Link to="/" className="flex items-center justify-center gap-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-            <Database className="w-6 h-6 text-white" />
-          </div>
+        <Link to="/" className="flex items-center justify-center gap-2 group">
+          <Logo className="w-10 h-10 transition-transform group-hover:scale-105" />
           <span className="text-2xl font-bold text-slate-900 dark:text-white">URLStash</span>
         </Link>
         <h2 className="mt-6 text-center text-3xl font-bold text-slate-900 dark:text-white">

@@ -12,15 +12,15 @@ export function Landing() {
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2 group">
               <Logo className="w-10 h-10 transition-transform group-hover:scale-105" />
-              <span className="text-xl font-bold text-slate-900 dark:text-white">URLStash</span>
+              <span className="text-xl font-bold text-slate-900 dark:text-white hidden sm:inline">URLStash</span>
             </Link>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <ThemeToggle />
-              <Link to="/login">
+              <Link to="/login" className="hidden sm:block">
                 <Button variant="ghost">Login</Button>
               </Link>
               <Link to="/signup">
-                <Button>Get Started</Button>
+                <Button size="sm" className="sm:text-base">Get Started</Button>
               </Link>
             </div>
           </div>
